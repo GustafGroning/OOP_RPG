@@ -23,9 +23,34 @@ class Character:
         self.health = hp
         self.damage = d
 
-hero = Character(15, 3)
+    def heal(self):
+        self.health = (self.health + 4)
 
-class Goblin(Character): #might be unneccecary, but if characater gets complicated later enemies should be based on character.
+hero = Character(30, 6)
+
+class Goblin(): #might be unneccecary, but if characater gets complicated later enemies should be based on character.
     def __init__(self):
-        self.health = 8
+        self.health = 10
         self.damage = 2
+
+badGuy = Goblin()
+
+def combat():
+    action = input("type attack or heal!")
+    if action == "attack":
+        badGuy.health = badGuy.health - hero.damage
+    elif action == "heal":
+        hero.heal()
+    else:
+        print("invalid command, try again.")
+        combat()
+    
+    if badGuy.health <= 0:
+        print("you win!") # måste hoppa till en annan metod istället för att undvika repition.
+
+        
+    print("you currently have ", hero.health, " HP left, your enemy has ", badGuy.health, " HP left!")
+    
+    combat()
+
+combat()
